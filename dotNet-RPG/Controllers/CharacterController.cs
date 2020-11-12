@@ -2,6 +2,7 @@
 using dotNet_RPG.Models;
 using dotNet_RPG.Service.CharacterService;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace dotNet_RPG.Controllers
@@ -45,6 +46,17 @@ namespace dotNet_RPG.Controllers
                 return NotFound(response);
             }
 
+            return Ok(response);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            ServiceResponse<List<GetCharacterDTO>> response = await _characterService.DeleteCharacter(id);
+            if (response.Data == null)
+            {
+                return NotFound(response);
+            }
             return Ok(response);
         }
     }
